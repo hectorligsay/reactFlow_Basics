@@ -6,4 +6,4 @@ Output
 
 Grey Circles are called handles  to connect to different nodes  
 * lines are edges that connect each nodes
-* circles are dots 
+* circles are dots `
