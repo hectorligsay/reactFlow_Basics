@@ -1,0 +1,3 @@
+Create payCountry tsx file accordingly.
+Once created, import it into the workflow page as a nodeType.
+Add handles also like in the previous exercises after the Box containers.

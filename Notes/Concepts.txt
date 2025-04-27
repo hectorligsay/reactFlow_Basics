@@ -7,3 +7,42 @@ Output
 Grey Circles are called handles  to connect to different nodes  
 * lines are edges that connect each nodes
 * circles are dots `
+
+To create notes:
+const nodes: Node[] = [
+  {
+    id: "1",
+    data: {
+      label: "Node 1",
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: "2",
+    data: {
+      label: "Node 2",
+    },
+    position: { x: 200, y: 200 },
+  },
+];
+
+To create edges:
+// Build edges
+const edges: Edge[] = [{ id: "1-2", source: "1", target: "2", animated: true }];
+
+To implement it onto the page:
+export const Workflow = () => {
+  return (
+    <Box height={"500px"} width="500px" border="1px solid black">
+      <ReactFlow nodes={nodes} edges={edges} fitView>
+        <Controls />
+        <Background />
+      </ReactFlow>
+    </Box>
+  );
+};
+
+1. We use the ReactFlow component and put nodes/edges in there. fitView 
+is used to auto scale to view the nodes.
+2. Controls allows user to move around and zoom in/out. 
+3. Background adds dots to make it look kewl

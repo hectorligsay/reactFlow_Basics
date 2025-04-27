@@ -1,0 +1,9 @@
+import React from "react";
+import { BezierEdge, EdgeProps } from "reactflow";
+
+export default function CustomEdge(props: EdgeProps) {
+  return <BezierEdge {...props} />;
+}
+
+
+create the customedge tsx file

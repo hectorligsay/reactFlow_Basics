@@ -1,0 +1,54 @@
+With using state it'll allow us to actually make edges and move around.
+
+need to use hooks:
+export const Workflow = () => {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  return (
+    <Box height={"500px"} width="500px" border="1px solid black">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        fitView
+      >
+        <Controls />
+        <Background />
+      </ReactFlow>
+    </Box>
+  );
+};
+
+1. We change nodes/edges to initial nodes/edges to initialize the 
+nodes/edges.
+2. Create the state by importing them and assigning them to the consts
+3. Apply onNodes/Edges change functions in the ReactFlow props
+
+Now my nodes can move n stuff yerrrr
+
+Now to connect the circle dots:
+create an onConnect and use it as a prop:
+  // Create the initial connector
+  const onConnect = useCallback((connection: Connection) => {
+    const edge = { ...connection, animated: true, id: `${edges.length} + 1` };
+    setEdges((prevEdges) => addEdge(edge, prevEdges));
+  }, []);
+
+  return (
+    <Box height={"500px"} width="500px" border="1px solid black">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        fitView
+      >
+        <Controls />
+        <Background />
+      </ReactFlow>
+    </Box>
+  );
+};

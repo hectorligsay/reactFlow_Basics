@@ -1,0 +1,5 @@
+Edit the oncClick for the icons and use const {setNodes} = useReactFlow()
+This allows us to get id for that particular node 
+
+to get the node back we need to create paymentProviderSelect.tsx for
+provider dropdown to select from

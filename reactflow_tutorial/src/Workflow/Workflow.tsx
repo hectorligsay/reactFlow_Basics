@@ -4,35 +4,60 @@ import ReactFlow, {
   Background,
   MiniMap,
   Controls,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  EdgeTypes,
+  Connection,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { Box, position } from "@chakra-ui/react";
+import { useCallback } from "react";
+import PaymentInit from "./PaymentInit";
+import PaymentCountry from "./PaymentCountry";
+import { initialEdges, initialNodes } from "./Workflow.constants";
+import PaymentProvider from "./PaymentProvider";
+import PaymentProviderSelect from "./PaymentProviderSelect";
+import CustomEdge from "./CustomEdge";
 
-// build nodes:
-const nodes: Node[] = [
-  {
-    id: "1",
-    data: {
-      label: "Node 1",
-    },
-    position: { x: 0, y: 0 },
-  },
-  {
-    id: "2",
-    data: {
-      label: "Node 2",
-    },
-    position: { x: 200, y: 200 },
-  },
-];
+// Build the default nodeTypes
+const nodeTypes = {
+  paymentInit: PaymentInit,
+  paymentCountry: PaymentCountry,
+  paymentProvider: PaymentProvider,
+  paymentProviderSelect: PaymentProviderSelect,
+};
 
-// Build edges
-const edges: Edge[] = [{ id: "1-2", source: "1", target: "2", animated: true }];
+const edgeTypes = {
+  customEdge: CustomEdge,
+};
 
 export const Workflow = () => {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  // Create the initial connector
+  const onConnect = useCallback((connection: Connection) => {
+    const edge = {
+      ...connection,
+      animated: true,
+      id: `${edges.length} + 1`,
+      type: "customEdge",
+    };
+    setEdges((prevEdges) => addEdge(edge, prevEdges));
+  }, []);
+
   return (
     <Box height={"500px"} width="500px" border="1px solid black">
-      <ReactFlow nodes={nodes} edges={edges} fitView>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        fitView
+      >
         <Controls />
         <Background />
       </ReactFlow>

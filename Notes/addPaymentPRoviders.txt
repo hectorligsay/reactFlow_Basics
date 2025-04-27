@@ -1,0 +1,6 @@
+Create the constant objects in the workflow constants file.
+
+Import it into the workflow like the country and the init payment.
+
+Create paymentprovider.tsx file . We set up a provider image map specifc to the keys of the provider.
+We use inline styling for the boxes and to create the edges that allow us to connect the boxes.

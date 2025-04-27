@@ -1,5 +1,14 @@
+Edit the constants file and import it to workflow.tsx
+
+id: "1",
+    position: { x: 100, y: 100 },
+    data: { amount: 10 },
+    type: "paymentInit",
+
+
+make paymentInit tsx component
 import React from "react";
-import { NodeProps, Handle, Position } from "reactflow";
+import { NodeProps } from "reactflow";
 import { Box, Text } from "@chakra-ui/react";
 
 export default function PaymentInit({
@@ -17,7 +26,13 @@ export default function PaymentInit({
           ${amount}
         </Text>
       </Box>
-      <Handle type="source" position={Position.Right} />
     </Box>
   );
 }
+
+
+Create the handle for it in payment init component:
+
+<Handle type="source" position={Position.Right} />
+1. type source: edge can only initiate from this handle
+2. position: position
