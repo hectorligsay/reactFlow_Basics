@@ -2,6 +2,7 @@ import React from "react";
 import { NodeProps, Position, Handle } from "reactflow";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import ReactCountryFlag from "react-country-flag";
+import CustomHandle from "./CustomHandle";
 
 export default function PaymentCountry({
   data: { currency, country, countryCode },
@@ -30,8 +31,8 @@ export default function PaymentCountry({
           <Text fontSize="x-small">{currency}</Text>
         </Box>
       </Flex>
-      <Handle type="source" position={Position.Right}></Handle>
-      <Handle type="target" position={Position.Left}></Handle>
+      <CustomHandle type="source" position={Position.Right} />
+      <CustomHandle type="target" position={Position.Left} />
     </Flex>
   );
 }
