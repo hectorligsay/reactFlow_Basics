@@ -6,11 +6,21 @@ import {
   EdgeLabelRenderer,
   EdgeProps,
   getBezierPath,
+  useReactFlow,
 } from "reactflow";
 
 export default function CustomEdge(props: EdgeProps) {
-  const { sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } =
-    props;
+  const {
+    id,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    sourcePosition,
+    targetPosition,
+  } = props;
+
+  const { setEdges } = useReactFlow();
 
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -32,7 +42,11 @@ export default function CustomEdge(props: EdgeProps) {
           color="red"
           transform={`translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`}
           bg="transparent"
+          pointerEvents={"all"} // allows for us to select the X to delete
           size="small"
+          onClick={() =>
+            setEdges((prevEdges) => prevEdges.filter((edge) => edge.id !== id))
+          }
         />
       </EdgeLabelRenderer>
     </>
